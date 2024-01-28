@@ -1,14 +1,14 @@
-from taipy.gui import Gui, Markdown
+from taipy import Gui
 import pandas as pd
 
-# read the cleaned data from the csv file
-df = pd.read_csv('wildfire_data_clean.csv')
+df = pd.read_csv('data/wildfire_data_clean.csv')
 
-# create a markdown string with the table definition
-md = f"<|{df}|table|page_size=10|page_size_options=[10, 20, 50, 100]|>"
+page = """
+# BC Wildfires List
 
-# create a gui object with the markdown string
-gui = Gui(page=Markdown(md))
+DataFrame: <|{data}|table|>
+<|{df}|table|page_size=10|page_size_options=[10, 20, 50, 100]|filter=True|group_by[Category]=True|apply[Calories]=sum|>
 
-# run the gui
-gui.run()
+"""
+
+Gui(page=page).run()
