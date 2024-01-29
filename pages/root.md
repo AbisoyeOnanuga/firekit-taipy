@@ -1,2 +1,2 @@
-        <|toggle|theme|>
-        <|navbar|> 
+<|toggle|theme|>
+<|navbar|> 
