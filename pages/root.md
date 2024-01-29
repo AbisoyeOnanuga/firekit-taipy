@@ -1,0 +1,2 @@
+        <|toggle|theme|>
+        <|navbar|> 
