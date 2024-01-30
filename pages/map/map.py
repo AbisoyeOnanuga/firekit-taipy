@@ -85,15 +85,25 @@ data['Discovery Date'] = data['Discovery Date'].dt.strftime(format)
 # make an edit to the data in the Stage of Control column by replacing the values
 data['Stage of Control'] = data['Stage of Control'].replace({'OUT_CNTRL': 'Out Of Control', 'HOLDING': 'Being Held', 'UNDR_CNTRL': 'Under Control'})
 
-
 # Add a column holding the bubble size:
 #   Min(incidentSizeEstimatedHa) -> size =  8
 #   Max(incidentSizeEstimatedHa) -> size = 60
 data["size"] = numpy.interp(data["Size (Ha)"], [data["Size (Ha)"].min(), data["Size (Ha)"].max()], [8, 60])
 
 # Add a column holding the bubble hover texts
-# Format is "<incident location> [<stage of control>]"
+# Format is "<Location> [<Stage of Control>]"
 data["text"] = data.apply(lambda row: f"Location: {row['Location']}<br> Stage of Control: [{row['Stage of Control']}]<br> Size (Ha): {row['Size (Ha)']}<br> Fire Centre: {row['Fire Centre']}<br> Last Updated: {row['Last Updated']}<br> Discovery Date: {row['Discovery Date']}", axis=1)
+
+hoverlabel = {
+    # Use a transparent grey color for the background
+    "bgcolor": "rgba(128, 128, 128, 0.5)",
+    # Use a black color for the border
+    "bordercolor": "black",
+    # Use a black color and a 12px size for the font
+    "font": {"color": "black", "size": 12},
+    # Use a left alignment for the text
+    "align": "left"
+}
 
 marker = {
     # Use the "size" column to set the bubble size
@@ -102,7 +112,9 @@ marker = {
     "color": "stage of Control",
     # Use a discrete color map to assign different colors to different stages of control
     "color_discrete_map": {"Out of Control": "red", "Being Held": "orange", "Under Control": "green"},
-    "text": "text"
+    "text": "text",
+    # Use the "hoverlabel" parameter to customize the hover text box
+    "hoverlabel": hoverlabel
 }
 
 layout = {
@@ -114,6 +126,7 @@ layout = {
         "subunitwidth": 2,
         "coastlinewidth": 1,
         "center": {"lat": 54.5, "lon": -125.5},
+        "fitbounds": "locations",
         "projection_scale": 1,
         "showcountries": True,
         "countrycolor": "white",
@@ -123,9 +136,7 @@ layout = {
         "showlakes": True,
         "showrivers": True,
         "resolution": 100,
-        "style": "google",
-        "width": 1820,
-        "height": 800
+        "projection": "van der grinten"
     }
 }
 

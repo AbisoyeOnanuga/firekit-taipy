@@ -1,2 +1,2 @@
 <|toggle|theme|>
-<|navbar|> 
+<|navbar|alight=center|> 
