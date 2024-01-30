@@ -4,7 +4,7 @@
 
 <br/>
 
-<|layout|columns=1 1 1|gap=50px 20px|
+<|layout|columns=1 1 1|gap=50px|
 <|card|
 **Location**{: .color-primary}
 <|{data_location.iloc[-1]['Location']}|text|class_name=h2|>
@@ -20,8 +20,8 @@
 <|{'{:,}'.format(int(data_location.iloc[-1]['Size (Ha)'])).replace(',', ' ')}|text|class_name=h2|>
 |>
 |>
-
-
+<br/>
+<br/>
 <|layout|columns=1 1 1|gap=50px|
 <|card|
 **Fire Centre**{: .color-primary}
