@@ -23,10 +23,6 @@ This app visualizes BC Wildfire Services active fires. Pages shows active fires 
 
 This app works with a Python version 3.11.5. run the *main.py* in the `root/` folder. You can also find a *requirements.txt* in the `root/` folder.
 
-## Introduction
-
-Firekit manages multiple pages.
-
 ### Table
 
 The table page show a list of all active wildfires in BC. the list can be filtered with a control at the top left by applying multiple filters for any column.
@@ -48,7 +44,7 @@ The dashboard page shows wildfire status on a specific location. The location ca
   - `root/data`: Contains the application data files.
   - `root/pages`: Contains the page definition files.
 - `docs/`: contains the images for the documentation
-- `INSTALLATION.md`: Instructions to install _demo-covid-dashboard_.
+- `INSTALLATION.md`: Instructions to install _firekit-taipy_.
 - `LICENSE`: MIT License.
 - `README.md`: Current file.
 
@@ -57,4 +53,4 @@ Copyright 2024 Firekit
 
 ## Installation
 
-Want to install _Demo Covid Dashboard_? Check out our [`INSTALLATION.md`](INSTALLATION.md) file.
+Want to install _firekit-taipy_? Check out our [`INSTALLATION.md`](INSTALLATION.md) file.
