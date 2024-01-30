@@ -1,7 +1,5 @@
-# firekit-taipy
+# Firekit
 A wildfire data dashboard for BC designed with Taipy GUI
-
-# Demo Covid Dashboard
 
 ## Usage
 - [Usage](#usage)
