@@ -4,7 +4,7 @@ import numpy as np
 
 from data.data import data
 
-selector_location = list(np.sort(data['incidentLocation'].astype(str).unique()))
+selector_location = list(np.sort(data['Location'].astype(str).unique()))
 selected_location  = 'North Arm Stuart Lake'
 
 root = Markdown("pages/root.md")

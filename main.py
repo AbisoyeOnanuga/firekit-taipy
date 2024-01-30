@@ -9,9 +9,9 @@ from pages.root import root, selected_location, selector_location
 
 pages = {
     '/':root,
-    "Wildfires-List":table_md,
+    "List":table_md,
 #    "Wildfires dashboard":dashboard_md,
-    "Wildfires-Map":map_md,
+    "Map":map_md,
 }
 
 
