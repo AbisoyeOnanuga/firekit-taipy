@@ -20,7 +20,7 @@ This app visualizes BC Wildfire Services active fires. Pages shows active fires 
 - **Level**: Beginner-Intermediate
 - **Topic**: Taipy-GUI
 - **Components/Controls**: 
-  - Taipy GUI: table, map, toggle, multi-pages
+  - Taipy GUI: table, map, dashboard, toggle, multi-pages
 
 ## How to run
 
@@ -32,12 +32,16 @@ Firekit manages multiple pages.
 
 ### Table
 
-The first page show a list of all active wildfires in BC. the list can be filtered with a control at the top left by applying multiple filters for any column.
+The table page show a list of all active wildfires in BC. the list can be filtered with a control at the top left by applying multiple filters for any column.
 
 
 ### Map
 
 A map can be found on this page to explore the data. Colors and sizes are dependent on the Stage of Control and incident size(Ha) in each location.
+
+### Dashboard
+
+The dashboard page shows wildfire status on a specific location. The location can be changed. It will update the cards provided on this page.
 
 
 ## Directory Structure
