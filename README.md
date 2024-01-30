@@ -10,11 +10,8 @@ A wildfire data dashboard for BC designed with Taipy GUI
 
 ## What is Firekit
 
-Taipy is a Python library for creating Business Applications. More information on our
-[website](https://www.taipy.io).
-
 [Firekit](https://github.com/AbisoyeOnanuga/firekit-taipy) is a multi-page application showing how Taipy can build a minimalist but useful application.
-This app visualizes BC Wildfire Services active fires. Pages shows active fires in different formats - as a table and on a map.
+This app visualizes BC Wildfire Services active fires. Pages shows active fires in different formats - as a table, a dashboard and on a map.
 
 ### Demo Type
 - **Level**: Beginner-Intermediate
