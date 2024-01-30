@@ -11,7 +11,7 @@ pages = {
     '/':root,
     "Wildfires-List":table_md,
 #    "Wildfires dashboard":dashboard_md,
-    "Map":map_md,
+    "Wildfires-Map":map_md,
 }
 
 
