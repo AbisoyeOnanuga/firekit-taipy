@@ -1,1 +1,0 @@
-web: taipy runserver main.py

@@ -114,7 +114,7 @@ marker = {
     "color_discrete_map": {"Out of Control": "red", "Being Held": "orange", "Under Control": "green"},
     "text": "text",
     # Use the "hoverlabel" parameter to customize the hover text box
-    "hoverlabel": hoverlabel
+    "hoverlabel": "hoverlabel"
 }
 
 layout = {
