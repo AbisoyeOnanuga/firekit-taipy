@@ -2,7 +2,6 @@ import pandas as pd
 from taipy.gui import Markdown
 import requests
 import pandas as pd
-from taipy.gui import Markdown
 import datetime
 import json
 
