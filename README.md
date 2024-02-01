@@ -1,5 +1,6 @@
 # Firekit
-A wildfire data dashboard for BC made with Taipy and Python
+A wildfire data dashboard for BC made with Taipy and Python <br/>
+![Dashboard](https://github.com/AbisoyeOnanuga/firekit-taipy/assets/102636953/e62145cc-8430-498a-907c-f35694da413a)
 
 ## Usage
 - [Usage](#usage)
