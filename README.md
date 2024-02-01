@@ -1,5 +1,5 @@
 # Firekit
-A wildfire data dashboard for BC designed with Taipy GUI
+A wildfire data dashboard for BC made with Taipy and Python
 
 ## Usage
 - [Usage](#usage)
@@ -14,14 +14,17 @@ A wildfire data dashboard for BC designed with Taipy GUI
 This app visualizes BC Wildfire Services active fires. Pages shows active fires in different formats - as a table, a dashboard and on a map.
 
 ### Demo Type
-- **Level**: Beginner-Intermediate
 - **Topic**: Taipy-GUI
 - **Components/Controls**: 
   - Taipy GUI: table, map, dashboard, toggle, multi-pages
 
 ## How to run
 
-This app works with a Python version 3.11.5. run the *main.py* in the `root/` folder. You can also find a *requirements.txt* in the `root/` folder.
+- This app works with a Python version 3.11.5. 
+- run `git clone https://github.com/AbisoyeOnanuga/firekit-taipy.git` from your editor
+- `cd firekit-taipy`
+- run `pip install -r requirements.txt`
+- run the *main.py* in the `root/` folder with `python main.py`
 
 ### Table
 
@@ -43,7 +46,6 @@ The dashboard page shows wildfire status on a specific location. The location ca
 - `root/`: Contains the demo source code.
   - `root/data`: Contains the application data files.
   - `root/pages`: Contains the page definition files.
-- `docs/`: contains the images for the documentation
 - `INSTALLATION.md`: Instructions to install _firekit-taipy_.
 - `LICENSE`: MIT License.
 - `README.md`: Current file.
