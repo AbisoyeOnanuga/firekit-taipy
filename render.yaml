@@ -1,4 +1,0 @@
-services:
-  - type: web
-    name: taipy-app
-    buildCommand: python main.py
