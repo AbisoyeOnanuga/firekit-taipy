@@ -86,10 +86,4 @@ data['Discovery Date'] = data['Discovery Date'].dt.strftime(format)
 data['Stage of Control'] = data['Stage of Control'].replace({'OUT_CNTRL': 'Out Of Control', 'HOLDING': 'Being Held', 'UNDR_CNTRL': 'Under Control'})
 
 # create a Markdown control and set the content to the Taipy table syntax
-#main_md = Markdown("# BC Wildfires List <|{data}|table|page_size=10|page_size_options=[10, 50, 100]|filter=True|group_by[Fire Centre]=True|apply[Size (Ha)]=sum|>")
 table_md = Markdown("pages/table/table.md")
-# create a page and set the content to the Markdown control
-#page = Gui(page=main_md)
-
-# run the page
-#page.run()
