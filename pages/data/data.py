@@ -3,6 +3,7 @@ import pandas as pd
 import datetime
 import json
 
+
 # define the base URL of the API
 base_url = 'https://wildfiresituation-api.nrs.gov.bc.ca/publicPublishedIncident'
 
@@ -82,8 +83,29 @@ data['Discovery Date'] = data['Discovery Date'].dt.strftime(format)
 # make an edit to the data in the Stage of Control column by replacing the values
 data['Stage of Control'] = data['Stage of Control'].replace({'OUT_CNTRL': 'Out Of Control', 'HOLDING': 'Being Held', 'UNDR_CNTRL': 'Under Control'})
 
+# Add a column holding the bubble size:
+#   Min(incidentSizeEstimatedHa) -> size =  8
+#   Max(incidentSizeEstimatedHa) -> size = 60
+# data["size"] = numpy.interp(data["Size (Ha)"], [data["Size (Ha)"].min(), data["Size (Ha)"].max()], [8, 60])
+
+# Add a column holding the bubble hover texts
+# Format is "<Location> [<Stage of Control>]"
+data["text"] = data.apply(lambda row: f"Location: {row['Location']}<br> Stage of Control: [{row['Stage of Control']}]<br> Size (Ha): {row['Size (Ha)']}<br> Fire Centre: {row['Fire Centre']}<br> Last Updated: {row['Last Updated']}<br> Discovery Date: {row['Discovery Date']}", axis=1)
+
+# Ensure that the 'lat' and 'lon' columns are numeric
+data['lat'] = pd.to_numeric(data['lat'], errors='coerce')
+data['lon'] = pd.to_numeric(data['lon'], errors='coerce')
+
+# Drop rows with NaN values that resulted from the conversion
+data = data.dropna(subset=['lat', 'lon'])
+
+# Update the bubble sizes by applying a different scaling factor
+# You can adjust the multiplier to scale the bubble sizes as needed
+# data['size'] = numpy.interp(data["Size (Ha)"], [data["Size (Ha)"].min(), data["Size (Ha)"].max()], [100, 100])
+# data['size'] = data['Size (Ha)'].apply(lambda x: max(x**1, 10))  # Replace 0.5 with your preferred exponent
+
 # Define the CSV file name
-csv_file_name = 'wildfire_data.csv'
+# csv_file_name = 'wildfire_data.csv'
 
 # Save the DataFrame to a CSV file
 #data.to_csv(csv_file_name, index=False)
