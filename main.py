@@ -21,3 +21,4 @@ if __name__ == '__main__':
     tp.Core().run()
     
     gui_multi_pages.run(title="BC Wildfires List")
+    

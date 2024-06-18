@@ -1,7 +1,7 @@
 # import the necessary modules and libraries
 import requests
 import pandas as pd
-from taipy import Gui
+from taipy import gui
 from taipy.gui import Markdown
 import datetime
 import json
