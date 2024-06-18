@@ -119,8 +119,8 @@ marker = {
 
 layout = {
     "geo": {
-        "showland": False,
-        "showocean": False,
+        "showland": True,
+        "showocean": True,
         "scope": "canada",
         "subunitcolor": "lightgrey",
         "subunitwidth": 2,
@@ -136,7 +136,9 @@ layout = {
         "showlakes": True,
         "showrivers": True,
         "resolution": 100,
-        "projection": "van der grinten"
+        "projection": "van der grinten",
+        # Adjust the 'fitbounds' parameter to change the size of the map box
+        "fitbounds": {"latmin": -60, "latmax": 60, "lonmin": -140, "lonmax": -60}
     }
 }
 
