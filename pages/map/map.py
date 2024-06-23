@@ -5,6 +5,7 @@ from taipy import Gui
 from taipy.gui import Markdown
 import datetime
 import json
+import plotly.express as px
 
 # define the base URL of the API
 base_url = 'https://wildfiresituation-api.nrs.gov.bc.ca/publicPublishedIncident'
@@ -117,29 +118,40 @@ marker = {
     "hoverlabel": "hoverlabel"
 }
 
-layout = {
-    "geo": {
-        "showland": True,
-        "showocean": True,
-        "scope": "canada",
-        "subunitcolor": "lightgrey",
-        "subunitwidth": 2,
-        "coastlinewidth": 1,
-        "center": {"lat": 54.5, "lon": -125.5},
-        "fitbounds": "locations",
-        "projection_scale": 1,
-        "showcountries": True,
-        "countrycolor": "white",
-        "countrywidth": 2,
-        "showsubunits": True,
-        "showcoastlines": True,
-        "showlakes": True,
-        "showrivers": True,
-        "resolution": 100,
-        "projection": "van der grinten",
-        # Adjust the 'fitbounds' parameter to change the size of the map box
-        "fitbounds": {"latmin": -60, "latmax": 60, "lonmin": -140, "lonmax": -60}
-    }
+# Adjust the color mapping for the 'Stage of Control'
+color_discrete_map = {
+    'Out Of Control': 'red',
+    'Being Held': 'orange',  # Assuming 'Being Held' is a stage you want to keep as orange
+    'Under Control': 'green'
 }
+
+# Update the bubble sizes by applying a different scaling factor
+# You can adjust the multiplier to scale the bubble sizes as needed
+data['size'] = data['Size (Ha)'].apply(lambda x: max(x**0.5, 10))  # Replace 0.5 with your preferred exponent
+
+# Create the scatter mapbox with the updated color map and sizes
+fig = px.scatter_mapbox(data,
+                        lat='lat',
+                        lon='lon',
+                        size='size',
+                        color='Stage of Control',
+                        color_discrete_map=color_discrete_map,
+                        size_max=15,
+                        zoom=5,
+                        mapbox_style='open-street-map',
+                        hover_name='Incident Name',
+                        hover_data=['Location', 'Size (Ha)', 'Stage of Control', 'Last Updated', 'Discovery Date'])
+
+# Update the layout if needed
+fig.update_layout(
+    margin={'r':0, 't':0, 'l':0, 'b':0},
+    mapbox=dict(
+        center=dict(lat=54.5, lon=-125.5),
+        style='carto-positron',
+    )
+)
+
+# Show the figure
+fig.show()
 
 map_md = Markdown("pages/map/map.md")
