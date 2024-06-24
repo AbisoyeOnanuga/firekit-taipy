@@ -1,10 +1,14 @@
 import numpy
-from taipy import Gui
 from taipy.gui import Markdown
 import plotly.express as px
 
-# Import the Markdown content from the .md file
-from .map import map_md_content
+from data.data import fetch_data, prepare_map_data
+
+# Fetch the data
+data = fetch_data()
+
+# Prepare the data specifically for the map
+map_data = prepare_map_data(data)
 
 # Define the function to create the Plotly map figure
 def create_map_figure(data):
@@ -48,9 +52,4 @@ def create_map_figure(data):
     )
     return fig
 
-
-# Define a function to set the map content in the GUI
-def set_map_content(gui, data):
-    map_figure = create_map_figure(data)
-    gui.set_variable("map_figure", map_figure)
-    gui.set_page_content("Map", Markdown(map_md_content))
+map_md = Markdown("pages/map/map.md")

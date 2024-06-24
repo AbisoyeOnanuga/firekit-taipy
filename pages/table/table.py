@@ -1,10 +1,9 @@
 # import the necessary modules and libraries
 from taipy.gui import Markdown
 
-# Import the Markdown content from the .md file
-from table import table_md_content
+# import dataframe function from data/data.py
 
-# Define a function to set the table content in the GUI
-def set_table_content(gui, data):
-    gui.set_variable("data", data)
-    gui.set_page_content("List", Markdown(table_md_content))
+# define data functions for the table page
+
+# create a Markdown control and set the content to the Taipy table syntax
+table_md = Markdown("pages/table/table.md")
