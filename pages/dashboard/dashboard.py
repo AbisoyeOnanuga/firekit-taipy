@@ -1,5 +1,5 @@
 from taipy.gui import Markdown
-from data.data import fetch_data, ms_to_datetime  # Import the necessary functions
+from ..data.data import fetch_data, ms_to_datetime  # Import the necessary functions
 
 # Fetch the data
 data = fetch_data()
