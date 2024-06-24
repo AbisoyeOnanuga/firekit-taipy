@@ -16,8 +16,8 @@
 |>
 
 <|card|
-**Size (Ha)**{: .color-primary}
-<|{'{:,}'.format(int(data_location.iloc[-1]['Size (Ha)'])).replace(',', ' ')}|text|class_name=h2|>
+**Estimated Size (Ha)**{: .color-primary}
+<|{'{:,}'.format(int(data_location.iloc[-1]['Estimated Size (Ha)'])).replace(',', ' ')}|text|class_name=h2|>
 |>
 |>
 <br/>
