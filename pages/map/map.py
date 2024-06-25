@@ -1,18 +1,14 @@
-import numpy
-from taipy.gui import Markdown
+import taipy.gui.builder as tgb
+import numpy as np
+from pages.data.data import fetch_data, prepare_map_data
 import plotly.express as px
 
-# Assuming that the following relative import works based on your project structure
-from ..data.data import fetch_data, prepare_map_data
-
-# Fetch the data
+# Fetch the data and prepare the map data
 data = fetch_data()
-
-# Prepare the data specifically for the map
 map_data = prepare_map_data(data)
 
-# Define the function to create the Plotly map figure
-def create_map_figure(data):
+# Define the function to create the map page using Taipy GUI Builder with scattergeo_mapbox
+def create_map_page():
     # Define hoverlabel and marker inside the function to ensure they use the latest data
     hoverlabel = {
         "bgcolor": "rgba(128, 128, 128, 0.5)",
@@ -28,13 +24,13 @@ def create_map_figure(data):
     }
 
     # Update the bubble sizes by applying a different scaling factor
-    data['size'] = numpy.interp(data["Estimated Size (Ha)"], [data["Estimated Size (Ha)"].min(), data["Estimated Size (Ha)"].max()], [10, 60])
+    map_data['size'] = np.interp(map_data["Estimated Size (Ha)"], [map_data["Estimated Size (Ha)"].min(), map_data["Estimated Size (Ha)"].max()], [10, 60])
 
     # Create the scatter mapbox with the updated color map and sizes
-    fig = px.scatter_mapbox(data,
+    fig = px.scatter_mapbox(map_data,
                             lat='Latitude',
                             lon='Longitude',
-                            size='Estimated Size (Ha)',
+                            size='size',
                             color='Stage of Control',
                             color_discrete_map=color_discrete_map,
                             size_max=15,
@@ -49,25 +45,18 @@ def create_map_figure(data):
         mapbox=dict(
             center=dict(lat=54.5, lon=-125.5),
             style='carto-positron',
-        )
+        ),
+        hoverlabel=hoverlabel
     )
-    return fig
 
-# Global variable to hold the HTML string of the map figure
-global_map_figure_html = ""
+    # Convert the Plotly figure to JSON for Taipy GUI Builder
+    fig_json = fig.to_json()
 
-# Use the map_data with the create_map_figure function to create the figure
-map_figure = create_map_figure(map_data)
+    with tgb.Page() as page:
+        # Use the JSON figure in the Taipy GUI Builder chart element
+        tgb.chart(type='scattergeo_mapbox', figure=fig_json)
 
-# Convert the Plotly figure to an HTML string and store it in the global variable
-map_figure_html = map_figure.to_html(full_html=False, include_plotlyjs='cdn')
+    return page
 
-# Escape curly braces
-map_figure_html = map_figure_html.replace("{", "{{'{'}'}}").replace("}", "{{'}'}}")
-
-# Store the escaped HTML string in the global variable
-global_map_figure_html = map_figure_html
-
-map_figure.show()   
-
-map_md = Markdown("pages/map/map.md")
+# Create the map page object
+map_page = create_map_page()
