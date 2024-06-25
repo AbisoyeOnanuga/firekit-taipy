@@ -4,6 +4,16 @@ import datetime
 import json
 import numpy
 
+
+# define a custom function that converts milliseconds to a datetime object
+def ms_to_datetime(ms):
+    # divide milliseconds by 1000 to get seconds
+    seconds = ms / 1000
+    # use datetime.fromtimestamp to get a datetime object
+    dt = datetime.datetime.fromtimestamp(seconds)
+    # return the datetime object
+    return dt
+
 def fetch_data():
     # define the base URL of the API
     base_url = 'https://wildfiresituation-api.nrs.gov.bc.ca/publicPublishedIncident'
@@ -54,16 +64,16 @@ def fetch_data():
 
     # convert the list of data to a pandas DataFrame
     data = pd.DataFrame(data)
-
+    
     # select only the desired columns in order
     data = data.loc[:, ['incidentName', 'lastUpdatedTimestamp', 'incidentLocation', 'stageOfControlCode', 'incidentSizeEstimatedHa', 'discoveryDate', 'fireCentreName', 'longitude', 'latitude']]
 
     # rename the columns to make them more readable
-    data.columns = ['Incident Name', 'Last Updated', 'Location', 'Stage of Control', 'Size (Ha)', 'Discovery Date', 'Fire Centre', 'lon', 'lat']
-    
-        # Apply the custom function to convert timestamps to datetime objects
-    data['Last Updated'] = data['lastUpdatedTimestamp'].apply(ms_to_datetime)
-    data['Discovery Date'] = data['discoveryDate'].apply(ms_to_datetime)
+    data.columns = ['Incident Name', 'Last Updated', 'Location', 'Stage of Control', 'Estimated Size (Ha)', 'Discovery Date', 'Fire Centre', 'Longitude', 'Latitude']
+
+    # Apply the custom function to convert timestamps to datetime objects
+    data['Last Updated'] = data['Last Updated'].apply(ms_to_datetime)
+    data['Discovery Date'] = data['Discovery Date'].apply(ms_to_datetime)
 
     # Format the datetime objects as strings
     format = '%m/%d/%Y %H:%M:%S'
@@ -71,7 +81,7 @@ def fetch_data():
     data['Discovery Date'] = data['Discovery Date'].dt.strftime(format)
 
     # Replace values in the Stage of Control column
-    data['Stage of Control'] = data['stageOfControlCode'].replace({
+    data['Stage of Control'] = data['Stage of Control'].replace({
         'OUT_CNTRL': 'Out Of Control',
         'HOLDING': 'Being Held',
         'UNDR_CNTRL': 'Under Control'
@@ -79,38 +89,29 @@ def fetch_data():
 
     return data
 
-# define a custom function that converts milliseconds to a datetime object
-def ms_to_datetime(ms):
-    # divide milliseconds by 1000 to get seconds
-    seconds = ms / 1000
-    # use datetime.fromtimestamp to get a datetime object
-    dt = datetime.datetime.fromtimestamp(seconds)
-    # return the datetime object
-    return dt
-
 # Specific processing for the map page
 def prepare_map_data(data):
-    # Ensure that the 'lat' and 'lon' columns are numeric
-    data['lat'] = pd.to_numeric(data['lat'], errors='coerce')
-    data['lon'] = pd.to_numeric(data['lon'], errors='coerce')
+    # Define minimum and maximum sizes for the bubbles
+    min_size = 8
+    max_size = 60
 
-    # Drop rows with NaN values that resulted from the conversion
-    data = data.dropna(subset=['lat', 'lon'])
+    # Interpolate sizes based on the 'Estimated Size (Ha)'
+    data["size"] = numpy.interp(data["Estimated Size (Ha)"],
+                                [data["Estimated Size (Ha)"].min(), data["Estimated Size (Ha)"].max()],
+                                [min_size, max_size])
 
-    # Add a column holding the bubble size and hover texts
-    #   Min(incidentSizeEstimatedHa) -> size = 8
-    #   Max(incidentSizeEstimatedHa) -> size = 60
-    data["size"] = numpy.interp(data["Size (Ha)"], [data["Size (Ha)"].min(), data["Size (Ha)"].max()], [8, 60])
-    # Add a column holding the bubble hover texts
-    # Format is "<Location> [<Stage of Control>]"
-    data["text"] = data.apply(lambda row: f"Location: {row['Location']}<br> Stage of Control: [{row['Stage of Control']}]<br> Size (Ha): {row['Size (Ha)']}<br> Fire Centre: {row['Fire Centre']}<br> Last Updated: {row['Last Updated']}<br> Discovery Date: {row['Discovery Date']}", axis=1)
+    # Create hover text for the bubbles
+    data["text"] = data.apply(lambda row: f"Location: {row['Location']}<br>"
+                                              f"Stage of Control: [{row['Stage of Control']}]<br>"
+                                              f"Size (Ha): {row['Estimated Size (Ha)']}<br>"
+                                              f"Fire Centre: {row['Fire Centre']}<br>"
+                                              f"Last Updated: {row['Last Updated']}<br>"
+                                              f"Discovery Date: {row['Discovery Date']}", axis=1)
 
-    # Ensure that the 'lat' and 'lon' columns are numeric
-    data['lat'] = pd.to_numeric(data['lat'], errors='coerce')
-    data['lon'] = pd.to_numeric(data['lon'], errors='coerce')
-
-    # Drop rows with NaN values that resulted from the conversion
-    data = data.dropna(subset=['lat', 'lon'])
+    # Convert 'Latitude' and 'Longitude' to numeric and drop NaN values
+    data['Latitude'] = pd.to_numeric(data['Latitude'], errors='coerce')
+    data['Longitude'] = pd.to_numeric(data['Longitude'], errors='coerce')
+    data.dropna(subset=['Latitude', 'Longitude'], inplace=True)
 
     # Update the bubble sizes by applying a different scaling factor
     # You can adjust the multiplier to scale the bubble sizes as needed
