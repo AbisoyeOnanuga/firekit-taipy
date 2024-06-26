@@ -1,3 +1,3 @@
 # **BC Wildfires**{: .color-primary} Map
 
-<|{data}|chart|type=scattergeo|mode=markers|lat=lat|lon=lon|marker={marker}|text=text|layout={layout}|>
+<|{map_data}|chart|type=scattergeo|mode=markers|lat=Latitude|lon=Longitude|marker={marker}|text=text|layout={layout}|>
