@@ -113,11 +113,6 @@ def prepare_map_data(data):
     data['Longitude'] = pd.to_numeric(data['Longitude'], errors='coerce')
     data.dropna(subset=['Latitude', 'Longitude'], inplace=True)
 
-    # Update the bubble sizes by applying a different scaling factor
-    # You can adjust the multiplier to scale the bubble sizes as needed
-    # data['size'] = numpy.interp(data["Size (Ha)"], [data["Size (Ha)"].min(), data["Size (Ha)"].max()], [100, 100])
-    # data['size'] = data['Size (Ha)'].apply(lambda x: max(x**1, 10))  # Replace 0.5 with your preferred exponent
-
     return data
 
 # Define the CSV file name
