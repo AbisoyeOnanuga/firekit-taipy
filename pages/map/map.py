@@ -29,8 +29,9 @@ marker = {
 }
 
 layout = {
+    "title": "Estimated Wildfire sizes in BC<br>(Hover for details)",
     "geo": {
-        "showland": False,
+        "showland": True,
         "showocean": False,
         "scope": "canada",
         "subunitcolor": "lightgrey",
@@ -38,7 +39,6 @@ layout = {
         "coastlinewidth": 1,
         "center": {"lat": 54.5, "lon": -125.5},
         "fitbounds": "locations",
-        "projection_scale": 1,
         "showcountries": True,
         "countrycolor": "white",
         "countrywidth": 2,
@@ -47,7 +47,7 @@ layout = {
         "showlakes": True,
         "showrivers": True,
         "resolution": 100,
-        "projection": "van der grinten"
+        "projection_type": "van der grinten"
     }
 }
 
