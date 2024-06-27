@@ -101,12 +101,12 @@ def prepare_map_data(data):
                                 [min_size, max_size])
 
     # Create hover text for the bubbles
-    data["text"] = data.apply(lambda row: f"Location: {row['Location']}<br>"
-                                              f"Stage of Control: [{row['Stage of Control']}]<br>"
-                                              f"Size (Ha): {row['Estimated Size (Ha)']}<br>"
-                                              f"Fire Centre: {row['Fire Centre']}<br>"
-                                              f"Last Updated: {row['Last Updated']}<br>"
-                                              f"Discovery Date: {row['Discovery Date']}", axis=1)
+    data["text"] = data.apply(lambda row:   f"Location: {row['Location']}<br>"
+                                            f"Stage of Control: [{row['Stage of Control']}]<br>"
+                                            f"Size (Ha): {row['Estimated Size (Ha)']}<br>"
+                                            f"Fire Centre: {row['Fire Centre']}<br>"
+                                            f"Last Updated: {row['Last Updated']}<br>"
+                                            f"Discovery Date: {row['Discovery Date']}", axis=1)
 
     # Convert 'Latitude' and 'Longitude' to numeric and drop NaN values
     data['Latitude'] = pd.to_numeric(data['Latitude'], errors='coerce')
