@@ -1,0 +1,16 @@
+/* Example CSS for a glass effect card */
+.card {
+    background: rgba(255, 255, 255, 0.8);  /* Semi-transparent white */
+    backdrop-filter: blur(200px);  /* Blur effect for the background */
+    border: 1px solid rgba(64, 64, 64, 0.5);  /* Thin border */
+    border-radius: var(--border_radius);  /* Use the border-radius from the stylekit */
+    /* ... other styles ... */
+}
+
+/* Ensure to define styles for both light and dark modes */
+@media (prefers-color-scheme: dark) {
+    .card {
+        background: rgba(28, 30, 32, 0.8);  /* Semi-transparent dark background for the card in dark mode */
+        /* ... other dark mode styles ... */
+    }
+}
