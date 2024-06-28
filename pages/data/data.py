@@ -92,8 +92,8 @@ def fetch_data():
 # Specific processing for the map page
 def prepare_map_data(data):
     # Define minimum and maximum sizes for the bubbles
-    min_size = 8
-    max_size = 60
+    min_size = 10
+    max_size = 50
 
     # Interpolate sizes based on the 'Estimated Size (Ha)'
     data["size"] = numpy.interp(data["Estimated Size (Ha)"],
@@ -113,6 +113,15 @@ def prepare_map_data(data):
     data['Longitude'] = pd.to_numeric(data['Longitude'], errors='coerce')
     data.dropna(subset=['Latitude', 'Longitude'], inplace=True)
 
+    # Map 'Stage Of Control' to colors
+    stage_of_control = {
+        "Out Of Control": "red",
+        "Being Held": "orange",
+        "Under Control": "green"
+    }
+    data["color"] = data["Stage of Control"].map(stage_of_control)
+    # Combine location label with hover text
+    data["text"] = data["Location"] + "<br>" + data["hover_text"]
     return data
 
 # Define the CSV file name
