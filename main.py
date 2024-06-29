@@ -17,15 +17,15 @@ pages = {
 
 stylekit = {
     "color_primary": "rgb(0, 123, 255)",  # A blue-ish primary color
-    "color_background_light": "rgb(240, 248, 255)",  # A light blue background for the light theme
-    #"color_primary": "rgb(255, 87, 34)",  # Example primary color
     "color_secondary": "rgb(255, 193, 7)",  # Example secondary color
     #"color_background_light": "rgb(250, 250, 250)",  # Light grey for light theme background
-    "color_background_dark": "rgb(33, 33, 33)",  # Dark grey for dark theme background
+    "color_background_light": "rgb(240, 248, 255)",  # A light blue background for the light theme
+    "color_background_dark": "rgb(29, 36, 75)",  # Dark blue for dark theme background
     "color_paper_dark": "rgb(55, 55, 55)",  # Darker grey for elevated elements in dark theme
     "color_paper_light": "rgb(255, 255, 255)",  # White for elevated elements in light theme
+    "color-contrast-dark": "rgb(248, 217, 217)", # Contrasting elements (such as text) color for dark backgrounds
+    "color-contrast-light": "rgb(43, 15, 58)", # Contrasting elements (such as text) color for light backgrounds
     "font_family": "'Roboto', sans-serif",  # Example font family
-    "--border_radius": "10px",  # Example border radius
     # ... other style properties ...
 }
 
