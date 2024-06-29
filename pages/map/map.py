@@ -19,13 +19,19 @@ hoverlabel = {
 marker = {
     # Use the "size" column to set the bubble size
     "size": "size",
-    # Use the "stageOfControlCode" column to set the marker color
-    "color": "stage of Control",
-    # Use a discrete color map to assign different colors to different stages of control
-    "color_discrete_map": {"Out of Control": "red", "Being Held": "orange", "Under Control": "green"},
+    # Use the mapped 'color' column for the marker color
+    "color": "color",
     "text": "text",
+    "label": "label",  # Assuming 'Location' is a column in your map_data
+    "textposition": "bottom center",
     # Use the "hoverlabel" parameter to customize the hover text box
-    "hoverlabel": "hoverlabel"
+    "hoverinfo": "text",  # Ensure this is set to display the hover text
+    "hoverlabel": {
+        "bgcolor": "rgba(128, 128, 128, 0.5)",
+        "bordercolor": "black",
+        "font": {"color": "black", "size": 12},
+        "align": "left"
+    }
 }
 
 layout = {
@@ -35,12 +41,13 @@ layout = {
         "showocean": False,
         "scope": "canada",
         "subunitcolor": "lightgrey",
+        "landcolor": "lightgrey",
         "subunitwidth": 2,
         "coastlinewidth": 1,
         "center": {"lat": 54.5, "lon": -125.5},
         "fitbounds": "locations",
         "showcountries": True,
-        "countrycolor": "white",
+        "countrycolor": "darkgrey",
         "countrywidth": 2,
         "showsubunits": True,
         "showcoastlines": True,
@@ -48,7 +55,45 @@ layout = {
         "showrivers": True,
         "resolution": 100,
         "projection_type": "van der grinten"
-    }
+    },
+    "annotations": [
+        {
+            "x": 1.0,
+            "y": 1,
+            "xref": "paper",
+            "yref": "paper",
+            "text": "Stage Of Control",
+            "showarrow": False,
+            "font": {"size": 24}
+        },
+        {
+            "x": 0.96,
+            "y": 0.8,  # Adjusted for more spacing
+            "xref": "paper",
+            "yref": "paper",
+            "text": "● Out of Control",  # Larger bullet point using Unicode
+            "showarrow": False,
+            "font": {"size": 16, "color": "red"}
+        },
+        {
+            "x": 0.94,
+            "y": 0.7,  # Adjusted for more spacing
+            "xref": "paper",
+            "yref": "paper",
+            "text": "● Being Held",  # Larger bullet point using Unicode
+            "showarrow": False,
+            "font": {"size": 16, "color": "orange"}
+        },
+        {
+            "x": 0.96,
+            "y": 0.55,  # Adjusted for more spacing
+            "xref": "paper",
+            "yref": "paper",
+            "text": "● Under Control",  # Larger bullet point using Unicode
+            "showarrow": False,
+            "font": {"size": 16, "color": "green"}
+        }
+    ]
 }
 
 map_md = Markdown("pages/map/map.md")
