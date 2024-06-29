@@ -1,16 +1,50 @@
+:root {
+    --border-radius-small: calc(var(--border-radius) / 2);
+    --border-radius-large: calc(var(--border-radius) * 2);
+    --box-shadow: 5px 5px 15px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+    --border-radius: 10px;
+}
+
 /* Example CSS for a glass effect card */
 .card {
-    background: rgba(255, 255, 255, 0.8);  /* Semi-transparent white */
-    backdrop-filter: blur(200px);  /* Blur effect for the background */
+    background: rgba(255, 255, 255, 0.1);  /* Semi-transparent white */
+    backdrop-filter: blur(10px);  /* Blur effect for the background */
     border: 1px solid rgba(64, 64, 64, 0.5);  /* Thin border */
-    border-radius: var(--border_radius);  /* Use the border-radius from the stylekit */
+    border-radius: 21px;  /* Use the border-radius from the stylekit */
     /* ... other styles ... */
 }
 
 /* Ensure to define styles for both light and dark modes */
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
     .card {
-        background: rgba(28, 30, 32, 0.8);  /* Semi-transparent dark background for the card in dark mode */
-        /* ... other dark mode styles ... */
+        background: rgba(198, 213, 227, 0.2);  /* Semi-transparent dark background for the card in dark mode */
+        border: 1px solid rgba(198, 213, 227, 0.5);
     }
+    .taipy-table tr:nth-child(odd) {
+        background-color: rgb(237, 241, 248, 0.8);  /* Dark grey for odd rows */
+    }
+    .taipy-table tr:nth-child(even) {
+        background-color: rgba(108, 162, 189, 0.5);  /* Even darker grey for even rows */
+    }
+    /* ... other dark mode styles ... */
+}
+
+/* Light mode alternate row coloring */
+@media (prefers-color-scheme: dark) {
+    .taipy-table tr:nth-child(odd) {
+        background-color: rgb(122, 122, 122, 0.8);  /* Light grey for odd rows */
+    }
+    .taipy-table tr:nth-child(even) {
+        background-color: rgba(21, 22, 45, 0.5);  /* White for even rows */
+    }
+    .taipy-table {
+        color: rgb(29, 29, 29)
+    }
+    .css-136tg2x {
+        color: rgba(255, 255, 255, 1)
+    }
+}
+
+.css-1pp47s5 {
+    background-color: (41, 50, 94);
 }
