@@ -121,7 +121,7 @@ def prepare_map_data(data):
     }
     data["color"] = data["Stage of Control"].map(stage_of_control)
     # Combine location label with hover text
-    data["text"] = data["Location"] + "<br>" + data["hover_text"]
+    data["label"] = data["Location"]
     return data
 
 # Define the CSV file name
