@@ -20,6 +20,10 @@
         background: rgba(198, 213, 227, 0.2);  /* Semi-transparent dark background for the card in dark mode */
         border: 1px solid rgba(198, 213, 227, 0.5);
     }
+    .card:hover {
+        background: rgba(198, 213, 227, 0.5);  /* Semi-transparent dark background on hover */
+        border: 1px solid rgba(29, 29, 29, 0.8);
+    }
     .taipy-table tr:nth-child(odd) {
         background-color: rgb(237, 241, 248, 0.8);  /* Dark grey for odd rows */
     }
@@ -35,16 +39,9 @@
         background-color: rgb(122, 122, 122, 0.8);  /* Light grey for odd rows */
     }
     .taipy-table tr:nth-child(even) {
-        background-color: rgba(21, 22, 45, 0.5);  /* White for even rows */
+        background-color: rgba(21, 22, 45, 0.5);  /* Dark grey for even rows */
     }
     .taipy-table {
         color: rgb(29, 29, 29)
     }
-    .css-136tg2x {
-        color: rgba(255, 255, 255, 1)
-    }
-}
-
-.css-1pp47s5 {
-    background-color: (41, 50, 94);
 }
